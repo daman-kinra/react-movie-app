@@ -10,6 +10,8 @@ function App() {
   const [movie, setMovie] = useState({});
   // const [page, setPage] = useState(1);  It will be used for pagination
 
+
+  
   const search = (evt) =>{
     if(evt.key==="Enter"){
     fetch(`${api.url}?apikey=${api.key}&s=${query}`)
