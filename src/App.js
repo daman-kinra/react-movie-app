@@ -1,7 +1,7 @@
 import React, {useState}from 'react';
 import './App.css';
 const api ={
-  url: 'http://www.omdbapi.com/',
+  url: 'https://www.omdbapi.com/',
   key: '9b078dd9'
 }
 
@@ -10,7 +10,7 @@ function App() {
   const [movie, setMovie] = useState({});
   // const [page, setPage] = useState(1);  It will be used for pagination
 
-  
+
   const search = (evt) =>{
     if(evt.key==="Enter"){
     fetch(`${api.url}?apikey=${api.key}&s=${query}`)
