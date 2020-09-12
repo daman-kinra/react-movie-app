@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState}from 'react';
 import './App.css';
+const api ={
+  url: 'http://www.omdbapi.com/',
+  key: '9b078dd9'
+}
 
 function App() {
+  const [query, setQuery] = useState('batman');
+  const [movie, setMovie] = useState({});
+  const [page, setPage] = useState(1);
+
+  const search = () =>{
+    fetch(`${api.url}?apikey=${api.key}&s=${query}`)
+    .then(res => res.json())
+    .then(result =>{
+      setMovie(result);
+      setQuery('');
+        console.log(result);
+    });
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+
     </div>
   );
 }
