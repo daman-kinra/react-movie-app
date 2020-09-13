@@ -35,22 +35,28 @@ function App() {
   }
   const search2 =()=>{
     if(page>=0){
-    fetch(`${api.url}?apikey=${api.key}&s=${called}&page=${page}`)
-    .then(res => res.json())
-    .then(result =>{
-      setMovie(result);
+      if(page==0){page=1}
       setPage(page+1);
-    });}
-  }
-
-  const search3 =()=>{
-    if(page>=1){
     fetch(`${api.url}?apikey=${api.key}&s=${called}&page=${page}`)
     .then(res => res.json())
     .then(result =>{
       setMovie(result);
       
+    });}
+  }
+
+  const search3 =()=>{
+    if(page>=1){
       setPage(page-1);
+      if(page==0){
+        page=1;
+      }
+    fetch(`${api.url}?apikey=${api.key}&s=${called}&page=${page}`)
+    .then(res => res.json())
+    .then(result =>{
+      setMovie(result);
+      
+
     });}
   }
   return (
