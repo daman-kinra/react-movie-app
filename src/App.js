@@ -34,29 +34,24 @@ function App() {
     });
   }
   const search2 =()=>{
-    if(page>=0){
-      if(page==0){page=1}
-      setPage(page+1);
+    
+    if(page>0){
     fetch(`${api.url}?apikey=${api.key}&s=${called}&page=${page}`)
     .then(res => res.json())
     .then(result =>{
       setMovie(result);
-      
+      setPage(page+1);
     });}
   }
 
-  const search3 =()=>{
+  const search3 = ()=>{
     if(page>=1){
-      setPage(page-1);
-      if(page==0){
-        page=1;
-      }
     fetch(`${api.url}?apikey=${api.key}&s=${called}&page=${page}`)
     .then(res => res.json())
     .then(result =>{
       setMovie(result);
+      setPage(page-1);
       
-
     });}
   }
   return (
