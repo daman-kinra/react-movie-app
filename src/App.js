@@ -8,7 +8,8 @@ const api ={
 function App() {
   const [query, setQuery] = useState('');
   const [movie, setMovie] = useState({});
-  // const [page, setPage] = useState(1);  It will be used for pagination
+  const [page, setPage] = useState(2);  //It will be used for pagination
+  const [called, setcalled] = useState('');
 
 
   
@@ -18,8 +19,8 @@ function App() {
     .then(res => res.json())
     .then(result =>{
       setMovie(result);
+      setcalled(query);
       setQuery('');
-        console.log(result);
     });
   }
   }
@@ -28,9 +29,28 @@ function App() {
     .then(res => res.json())
     .then(result =>{
       setMovie(result);
+      setcalled(query);
       setQuery('');
-        console.log(result);
     });
+  }
+  const search2 =()=>{
+    fetch(`${api.url}?apikey=${api.key}&s=${called}&page=${page}`)
+    .then(res => res.json())
+    .then(result =>{
+      setMovie(result);
+      setPage(page+1);
+    });
+  }
+
+  const search3 =()=>{
+    if(page>=2){
+    fetch(`${api.url}?apikey=${api.key}&s=${called}&page=${page}`)
+    .then(res => res.json())
+    .then(result =>{
+      setMovie(result);
+      
+      setPage(page-1);
+    });}
   }
   return (
     <div className="app">
@@ -45,6 +65,7 @@ function App() {
       <button onClick={search1} className="btn">Search</button>
       </div>
       {(movie.Response==="True")?(
+        <div className="re-box-vov">
         <div className="res-box">
           {movie.Search.map((items)=>{
             return(
@@ -65,7 +86,12 @@ function App() {
             </div>
             </div>
             )
-          })}
+          })} 
+          </div>
+          <div className="nexprev">
+          <button className="btn btn1" onClick={search3}>Prev</button>
+          <button className="btn btn1" onClick={search2}>Next</button>
+          </div>
         </div>
       ):('')}
     </div>
